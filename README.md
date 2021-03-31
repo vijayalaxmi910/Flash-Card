@@ -13,3 +13,4 @@ install mysql
 ````
 
 
+In app.js check port no and see the result in browser.
