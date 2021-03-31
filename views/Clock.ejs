@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+ 
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap');
+    </style>  -->
+    <style>
+    *{
+       margin: 1;
+       padding:1;
+       box-sizing:border-box;
+       font-family: "Josefin sans", sans-serif;
+     font-weight:100;
+     align-content: center;
+    }
+   
+    
+    
+    html{
+      font-size: 100%;
+      align-content: center;
+    }
+   
+   .main-div{
+     width:100vw;
+     min-height: 100vh;
+     display:grid;
+     place-items: centre;
+     background-color: rgb(182, 192, 201);
+     align-content: center;
+     font-size:20%;
+     place-items: centre;
+   
+    
+   }
+   
+   .inner-div{
+   width:40vw;
+   background-color: #fff;
+   padding:2rem 2rem;
+   border-radius: 1rem;
+   box-shadow: 0 0rem -0.7rem rgba(0,0,0,0.4);
+   margin-left: 400px;
+   margin-top: 100px;
+   margin-bottom: 500px;
+   
+     
+   }
+   
+   .inner-div h2{
+     font-size:1rem;
+     font-weight:50;
+     margin: 1rem 0 4rem 0;
+     margin-bottom: 20px;
+   }
+   
+   .inner-div li{
+     font-size: 1rem;
+     margin-top: 1rem;
+     list-style: none;
+     margin-top:10px;
+   }
+   
+   input{
+     cursor:pointer;
+   }
+    
+    
+     #submit,
+       .btn{
+       padding:1rem;
+       outline: none;
+       font-size: 1rem;
+       font-size:100;
+       display: block;
+       margin:auto;
+       border: none;
+       text-transform: uppercase;
+       color:#fff;
+       background-color: #74b9ff;
+       margin-top: 2rem;
+       cursor: pointer;
+       }
+    
+   
+   #submit:hover{
+     background: color #0984e3; ;
+   }
+   
+   
+   #showScore{
+      background-color: #dfe6e9;
+      margin-top: 1rem;
+      padding: 1rem 1rem;
+      box-shadow: 0 0rem -0.7rem rgba(0,0,0,0.4)
+   }
+   
+   .scoreArea{
+     display :none;
+   }
+   
+   #showScore h3{
+    font-size:1rem;
+    text-align: centre;
+   
+   }
+   #showScore .btn{
+     margin-top: 2rem;
+     background-color: #55efc4;
+     color: #2d3436;
+     text-align: centre;
+   }
+   
+   #showScore .btn:hover{
+     
+     background-color: #00b894;
+     color: #fff;
+   
+   }
+   
+   </style>
+</head>
+<body>
+  
+  <h2 style="font: weight 40px; background-color: #9cb800; margin-top: 3px; margin-bottom: 3.5px;margin-right: 1px; text-align: left; font-size: 1.5em;">Time left:  <span id="count"></span> <br> <a href="/quizes" > Back </a></h2>
+
+  <!-- <h2 style="font: weight 40px; background-color: #9cb800; margin-top: 3px; margin-bottom: 3.5px;margin-right: 1px; text-align: center; font-size: 1.5em;">Timer:  <span id="count"></span></h2> -->
+  <div class="main-div">
+<div class="inner-div">
+  <h2 class="question"> Question comes here</h2>
+  <ul>
+      <li> 
+      <input type="radio" name ="answer" id= "ans1" class="answer">
+      <label for ="ans1" id="option1"> Answer Option</label> 
+      </li>
+
+
+      <li> 
+        <input type="radio" name ="answer" id= "ans2" class="answer">
+        <label for ="ans2" id="option2"> Answer Option</label> 
+        </li>
+
+
+        <li> 
+          <input type="radio" name ="answer" id= "ans3" class="answer">
+          <label for ="ans3" id="option3"> Answer Option</label> 
+          </li>
+
+          <li> 
+            <input type="radio" name ="answer" id= "ans4" class="answer">
+            <label for ="ans4" id="option4"> Answer Option</label> 
+            </li>
+
+
+    </ul>
+<button id="submit"> submit </button>
+<div id="showScore" class="scoreArea"> </div>
+
+
+</div>
+
+
+  </div>
+<script >
+
+const quizDB= [
+
+    {
+    question: "Q1: The reflex angle between the hands of a clock at 10.25 is:",
+       a:"180",
+       b:"192 1/2",
+       c:" 195",
+       d:"197 1/2",
+       ans:"ans4"
+   
+    },
+    {
+    question: "Q2:A clock is started at noon. By 10 minutes past 5, the hour hand has turned through",
+    a:"145",
+    b:"150",
+    c:"155",
+    d:"160",
+    ans:"ans3"
+   
+   },
+   
+   {
+       question: "Q3:At 3:40, the hour hand and the minute hand of a clock form an angle of?",
+       a:"120",
+       b:"125",
+       c:"130",
+       d:"135",
+       ans:"ans3"
+   
+   },
+   {
+       question: "Q4:How many times are the hands of a clock at right angle in a day?" ,
+       a:"22",
+       b:"24",
+       c:"44",
+       d:"48",
+       ans:"ans3"
+   },
+   {
+       question: "Q5:How many times do the hands of a clock coincide in a day?",
+       a:"20",
+       b:"21",
+       c:"22",
+       d:"24",
+       ans:"ans3"
+   }
+   
+   
+   ];
+   
+   
+   const question=document.querySelector('.question');
+   const option1=document.querySelector('#option1');
+   const option2=document.querySelector('#option2');
+   const option3=document.querySelector('#option3');
+   const option4=document.querySelector('#option4');
+   
+   const submit=document.querySelector('#submit');
+   
+   const answers = document.querySelectorAll('.answer');
+   
+   const showScore=document.querySelector('#showScore');
+   
+   
+   
+   let questionCount=0;
+   let score=0;
+   
+   
+   const loadQuestion= () => {
+       const questionList=quizDB[questionCount];
+       question.innerText= quizDB[questionCount].question;
+    option1.innerText=questionList.a;
+    option2.innerText=questionList.b;
+    option3.innerText=questionList.c;
+    option4.innerText=questionList.d;
+   
+   }
+   loadQuestion();
+   
+   const getCheckAnswer=()=>{
+      let answer;
+   
+      answers.forEach((curAnsElem) =>{
+          if(curAnsElem.checked){
+              answer=curAnsElem.id;
+          }
+   
+    });
+   
+          return answer;
+   
+   };
+   
+   const deselectAll = ()=> {
+     answers.forEach((curAnsElem) => curAnsElem.checked= false );
+   
+   }
+   
+   submit.addEventListener('click', ()=> {
+    const checkedAnswer=getCheckAnswer();
+   
+    console.log(checkedAnswer);
+    
+    if(checkedAnswer==quizDB[questionCount].ans){
+        score++;
+    };
+   
+    questionCount++;
+    deselectAll();
+    if(questionCount<quizDB.length){
+       loadQuestion();
+   } 
+     else{
+         
+       showScore.innerHTML = `
+       <h3> You scored ${score}/${quizDB.length}  </h3> 
+    <button class ="btn" onclick="location.reload()"> Play Again </button>
+    
+    
+      `;
+    
+     showScore.classList.remove('scoreArea');
+     
+   }
+   
+   });
+       
+
+
+</script>
+
+<script>
+
+  // var countDownTime = 60;
+  //   function countDownTimer() {
+  //     var hours = parseInt( countDownTime / 3600 ) % 24;
+  //     var minutes = parseInt( countDownTime / 60 ) % 60;
+  //     var seconds = countDownTime % 60;
+  //     var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
+  //     document.getElementById("timer").innerHTML = result;
+  //        if(countDownTime == 0 ){ countDownTime = 60*60*60; }
+  //        countDownTime = countDownTime - 1;
+  //        setTimeout(function(){ countDownTimer() }, 1000);
+  //   }
+  //   countDownTimer();
+  var count = 15;
+var interval = setInterval(function(){
+  document.getElementById('count').innerHTML=count;
+  count--;
+  if (count === 0){
+    clearInterval(interval);
+    document.getElementById('count').innerHTML='Done';
+    // or...
+    alert("You're out of time!");
+  }
+}, 1000);
+  </script>
+  
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</body>
+</html>
